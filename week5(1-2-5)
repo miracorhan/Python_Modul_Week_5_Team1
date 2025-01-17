@@ -1,0 +1,127 @@
+
+#Question1: Create a Python class called "Rectangle" that represents a rectangle. The Rectangle class must have the following properties and methods:
+
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+# Create an instance of the Rectangle class
+rect = Rectangle(5, 7)
+
+print("Area:", rect.area())
+print("Perimeter:", rect.perimeter())
+
+#Question2: Create a "School" class in Python. This class should have the following features and functionality:
+
+class School:
+    def __init__(self, name, foundation_year):
+        self.name = name
+        self.foundation_year = foundation_year
+        self.students = []
+        self.teachers = {}
+
+    def add_new_student(self, student_name, class_name):
+        self.students.append({"name": student_name, "class": class_name})
+        print(f"Student named {student_name} has been added to class {class_name}.")
+
+    def add_new_teacher(self, teacher_name, branch):
+        self.teachers[teacher_name] = branch
+        print(f"Teacher named {teacher_name} has been added in the field of {branch}.")
+
+    def view_student_list(self):
+        if not self.students:
+            print("No students registered.")
+        else:
+            print("Student List:")
+            for student in self.students:
+                print(f"- {student['name']} (Class: {student['class']})")
+
+    def view_teacher_list(self):
+        if not self.teachers:
+            print("No teachers registered.")
+        else:
+            print("Teacher List:")
+            for teacher_name, branch in self.teachers.items():
+                print(f"- {teacher_name} (Field: {branch})")
+
+
+# Creating an instance using the School class
+school = School("Ataturk High School", 1995)
+
+# Adding students and teachers
+school.add_new_student("Nehir Dogan", "10A")
+school.add_new_student("Deniz Dogan", "11B")
+
+school.add_new_teacher("Ms. Emine", "Mathematics")
+school.add_new_teacher("Ms. Fatma", "Physics")
+
+# Viewing student and teacher lists
+school.view_student_list()
+school.view_teacher_list()
+
+#Question5: Create a "Customer" class and an "Account" class. Let the "Account" class inherit from the "Customer" class
+# and represent a customer's bank account information.
+
+class Customer:
+    def __init__(self, name, surname, id_number, phone):
+        self.name = name
+        self.surname = surname
+        self.id_number = id_number
+        self.phone = phone
+
+    def display_information(self):
+        print(f"Customer Information:\n"
+              f"Name: {self.name}\n"
+              f"Surname: {self.surname}\n"
+              f"ID Number: {self.id_number}\n"
+              f"Phone: {self.phone}")
+
+
+class Account:
+    def __init__(self, customer, account_number, balance=0):
+        self.customer = customer  # A Customer object
+        self.account_number = account_number
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"{amount} has been deposited. Current balance: {self.balance}")
+        else:
+            print("Invalid amount. Please enter a positive number.")
+
+    def withdraw(self, amount):
+        if amount > 0 and amount <= self.balance:
+            self.balance -= amount
+            print(f"{amount} has been withdrawn. Current balance: {self.balance}")
+        elif amount > self.balance:
+            print("Insufficient balance. Transaction failed.")
+        else:
+            print("Invalid amount. Please enter a positive number.")
+
+    def display_balance(self):
+        print(f"Account Balance: {self.balance}")
+
+
+# Create a customer
+customer1 = Customer(name="Ahmet", surname="Dogan", id_number="12345678901", phone="0532 555 4565")
+
+# Create an account and add the customer
+account1 = Account(customer=customer1, account_number="TR12345678901234567890", balance=444)
+
+# Display customer information
+account1.customer.display_information()
+
+# Perform account transactions
+account1.display_balance()
+account1.deposit(200)
+account1.withdraw(100)
+account1.withdraw(700)  # Example of insufficient balance
+account1.display_balance()
